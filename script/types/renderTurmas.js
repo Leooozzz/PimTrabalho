@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.renderTurmas = renderTurmas;
+var renderTs_1 = require("./renderTs");
+function renderTurmas() {
+    var html = "\n    <div class=\"container mx-auto p-6\">\n      <div class=\"max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-md\">\n        <h2 class=\"text-2xl font-bold mb-6 text-gray-800 text-center\">Cadastro de Turmas e Alunos</h2>\n\n        <form class=\"space-y-6\">\n          <div>\n            <label class=\"block text-sm font-medium text-gray-700 mb-2\">Nome da Turma</label>\n            <input \n              type=\"text\" \n              placeholder=\"Ex: 3\u00BA Ano A\" \n              class=\"border border-gray-300 p-3 w-full rounded-lg text-sm \n                    focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none\"\n            />\n          </div>\n\n          <div>\n            <label class=\"block text-sm font-medium text-gray-700 mb-2\">Nome do Aluno</label>\n            <input \n              type=\"text\" \n              placeholder=\"Digite o nome do aluno\" \n              class=\"border border-gray-300 p-3 w-full rounded-lg text-sm \n                    focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none\"\n            />\n          </div>\n\n          <div class=\"flex justify-end\">\n            <button \n              type=\"submit\" \n              class=\"bg-blue-600 text-white px-6 py-2 rounded-lg font-medium \n                    hover:bg-blue-700 transition duration-200 shadow-sm\"\n            >\n              Salvar\n            </button>\n          </div>\n        </form>\n      </div>\n    </div>\n  ";
+    (0, renderTs_1.attConteudoarea)(html);
+}

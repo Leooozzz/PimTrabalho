@@ -1,0 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.renderUsuarios = renderUsuarios;
+var renderTs_1 = require("./renderTs");
+function renderUsuarios() {
+    var html = "\n    <div class=\"container mx-auto p-6\">\n      <div class=\"max-w-lg mx-auto bg-white p-6 rounded-2xl shadow-lg\">\n        <div class=\"flex justify-center gap-4 mb-8\">\n          <a href=\"#\">\n            <button \n              class=\"h-12 w-40 rounded-xl bg-black text-xl text-white font-semibold border hover:bg-blue-500 transition\">\n              Aluno\n            </button>\n          </a>\n          <a href=\"#\">\n            <button \n              class=\"h-12 w-40 rounded-xl bg-black text-xl text-white font-semibold border hover:bg-blue-500 transition\">\n              Professor\n            </button>\n          </a>\n        </div>\n\n        <form action=\"\" class=\"flex flex-col items-center gap-6\">\n          <input \n            type=\"email\" \n            placeholder=\"Digite seu email\" \n            class=\"h-12 w-80 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500\"\n          >\n\n          <input \n            type=\"password\" \n            placeholder=\"Digite sua senha\" \n            class=\"h-12 w-80 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500\"\n          >\n\n          <input \n            type=\"password\" \n            placeholder=\"Confirme sua senha\" \n            class=\"h-12 w-80 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500\"\n          >\n\n          <button \n            type=\"submit\" \n            class=\"h-12 w-80 rounded-lg bg-blue-600 text-white font-semibold text-lg hover:bg-blue-700 transition\">\n            Cadastrar\n          </button>\n        </form>\n      </div>\n    </div>\n  ";
+    (0, renderTs_1.attConteudoarea)(html);
+}
+;
