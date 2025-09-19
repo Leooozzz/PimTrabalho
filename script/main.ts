@@ -18,67 +18,18 @@ function attConteudoarea(html: string) {
   }
 }
 
-function renderAula() {
-  const html = `
-    <div class="container mx-auto p-6">
-      <div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-md">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">Registro da Aula</h2>
-
-        <form action="" class="space-y-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Anotações</label>
-            <textarea 
-              class="border border-gray-300 p-3 w-full rounded-lg text-sm 
-                    focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none resize-none h-28" 
-              placeholder="Escreva suas anotações aqui..."
-            ></textarea>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Turma</label>
-            <input 
-              type="text" 
-              class="border border-gray-300 p-3 w-full rounded-lg text-sm 
-                    focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none" 
-              placeholder="Digite sua turma"
-            >
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Data</label>
-            <input 
-              type="date" 
-              class="border border-gray-300 p-3 w-full rounded-lg text-sm 
-                    focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none"
-            >
-          </div>
-
-          <div class="flex justify-end">
-            <button 
-              type="submit" 
-              class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium 
-                    hover:bg-blue-700 transition duration-200 shadow-sm"
-            >
-              Enviar
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  `;
-  attConteudoarea(html);
-}
-
 function renderTurmas() {
+
   const html = `
     <div class="container mx-auto p-6">
       <div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-md">
         <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">Cadastro de Turmas e Alunos</h2>
 
-        <form class="space-y-6">
+        <form id="submitTurmas" class="space-y-6">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">Nome da Turma</label>
             <input 
+              id="nome-turma"
               type="text" 
               placeholder="Ex: 3º Ano A" 
               class="border border-gray-300 p-3 w-full rounded-lg text-sm 
@@ -89,6 +40,7 @@ function renderTurmas() {
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Aluno</label>
             <input 
+              id="nome-aluno"
               type="text" 
               placeholder="Digite o nome do aluno" 
               class="border border-gray-300 p-3 w-full rounded-lg text-sm 
@@ -110,7 +62,120 @@ function renderTurmas() {
     </div>
   `;
   attConteudoarea(html);
+
+  const turmas: { nome: string; alunos: string[] }[] = [];
+
+  function turmaValidation(){
+  const turmasSubmit=document.querySelector('#submitTurmas') as HTMLFormElement;
+  turmasSubmit.addEventListener('submit',(event)=>{
+    event.preventDefault();
+  const nomeTurmaInput=document.querySelector('#nome-turma') as HTMLInputElement;
+  const nomeAlunoInput=document.querySelector('#nome-aluno') as HTMLInputElement;
+    if(nomeTurmaInput.value.trim()==='' || nomeAlunoInput.value.trim()===''){
+      alert("Preencha todos os campos")
+      return;
+    }
+  const nomeTurma=nomeTurmaInput.value.trim();
+  const nomeAluno=nomeAlunoInput.value.trim();
+  const turmaExistente = turmas.find(turmas => turmas.nome === nomeTurma);
+
+    if (turmaExistente) {
+      turmaExistente.alunos.push(nomeAluno);
+    } else {
+      turmas.push({ nome: nomeTurma, alunos: [nomeAluno] });
+      alert("Aluno cadastrado com sucesso");
+      nomeTurmaInput.value='';
+      nomeAlunoInput.value='';
+    }
+  }
+  )}
+turmaValidation();
+
+};
+
+function renderAula() {
+  const html = `
+    <div class="container mx-auto p-6">
+      <div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">Registro da Aula</h2>
+
+        <form action="" id="submitAula" class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Anotações</label>
+            <textarea 
+            id="textareainput"
+              class="border border-gray-300 p-3 w-full rounded-lg text-sm 
+                    focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none resize-none h-28" 
+              placeholder="Escreva suas anotações aqui..."
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Turma</label>
+            <input 
+            id="turmainput"
+              type="text" 
+              class="border border-gray-300 p-3 w-full rounded-lg text-sm 
+                    focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none" 
+              placeholder="Digite sua turma"
+            >
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Data</label>
+            <input 
+              type="date" 
+              id="datainput"
+              class="border border-gray-300 p-3 w-full rounded-lg text-sm 
+                    focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none"
+            >
+          </div>
+
+          <div class="flex justify-end">
+            <button 
+              type="submit" 
+              class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium 
+                    hover:bg-blue-700 transition duration-200 shadow-sm"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+  attConteudoarea(html);
+
+  const aulas: { turma: string; anotacoes: string; data: string }[] = [];
+  function aulaValidacao(){
+    const aulaSubmit=document.querySelector('#submitAula') as HTMLFormElement;
+    aulaSubmit.addEventListener('submit',(event)=>{
+      event.preventDefault();
+      const textareainput=document.querySelector('#textareainput')as HTMLTextAreaElement;
+      const turmainput=document.querySelector('#turmainput')as HTMLInputElement;
+      const datainput=document.querySelector('#datainput')as HTMLInputElement;
+      if(textareainput.value.trim()==='' ||turmainput.value.trim()===''||datainput.value.trim()===''){
+        alert("Preencha todos os Campos");
+        return;
+      }else{
+        const novaAula = {
+            turma: turmainput.value.trim(),
+            anotacoes: textareainput.value.trim(),
+            data: datainput.value
+              };
+
+              aulas.push(novaAula);
+              alert("Aula registrada com sucesso!");
+
+              textareainput.value = '';
+              turmainput.value = '';
+              datainput.value = '';
+      }
+    })
+  }
+  aulaValidacao();
 }
+
 
 function renderUpload() {
   const html = `
@@ -224,7 +289,7 @@ function renderUsuarios() {
 
   let tipoUsuario: 'aluno' | 'professor' | null = null;
 
-  // Seleção do tipo de usuário
+
   const botoesDatauser = document.querySelectorAll('[data-user]');
   botoesDatauser.forEach(botao => {
     botao.addEventListener('click', () => {
@@ -242,7 +307,7 @@ function renderUsuarios() {
     });
   });
 
-  // Formulário de login
+ 
   const formLogin = document.querySelector('#formLogin') as HTMLFormElement;
 
   formLogin.addEventListener('submit', (event) => {
@@ -255,7 +320,6 @@ function renderUsuarios() {
     validation(valoremailUser, valorpasswordUser);
   });
 
-  // Função de validação
   function validation(valoremailUser: string, valorpasswordUser: string) {
     const feedback = document.getElementById('user-feedback');
     if (valoremailUser === "admin@escola.com" && valorpasswordUser === "123456" && tipoUsuario === "professor") {
@@ -269,7 +333,7 @@ function renderUsuarios() {
     }
   }
 
-  // Painel do professor
+
   function renderPainelProfessor() {
     const html = `
       <div class="container mx-auto p-6">
@@ -293,7 +357,6 @@ function renderUsuarios() {
     `;
     attConteudoarea(html);
 
-    // Listeners pós-renderização
     const btnTurmas = document.querySelector('#btn-turmas') as HTMLButtonElement;
     btnTurmas?.addEventListener('click', renderTurmas);
 
